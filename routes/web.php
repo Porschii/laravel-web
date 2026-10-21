@@ -5,6 +5,10 @@ use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\DashboardController;
+
+// Dashboard Route
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 //Mahasiswa route
 Route::get('/pcr', function () {
