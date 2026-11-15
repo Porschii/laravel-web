@@ -1,0 +1,53 @@
+PENAMBAHAN FITUR FOTO PROFIL PORTOFOLIO - LARAVEL 13
+
+Project ini berasal dari ZIP Laravel yang kamu unggah. Fitur lama dipertahankan.
+Fitur foto yang ditambahkan:
+- Upload foto profil JPG/JPEG/PNG/WEBP, maksimal 2 MB.
+- Preview foto sebelum disimpan.
+- Menampilkan foto di tabel daftar CV dan halaman detail.
+- Mempertahankan foto lama jika edit tanpa memilih foto baru.
+- Menghapus foto lama saat foto diganti.
+- Menghapus file foto saat data CV dihapus.
+
+KONFIGURASI DATABASE:
+File .env pada paket ini disetel ke MySQL:
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel_13
+DB_USERNAME=root
+DB_PASSWORD=
+
+Pastikan MySQL Laragon aktif dan database laravel_13 sudah dibuat di HeidiSQL.
+Jika nama database atau password berbeda, sesuaikan file .env.
+
+LANGKAH MENJALANKAN:
+1. Ekstrak ZIP.
+2. Buka folder laravel-13 di VS Code.
+3. Pastikan MySQL Laragon aktif dan database laravel_13 tersedia.
+4. Jalankan:
+   php artisan config:clear
+   php artisan migrate
+   php artisan storage:link
+   php artisan optimize:clear
+   php artisan serve
+5. Buka http://127.0.0.1:8000/cv
+
+MIGRATION:
+File baru:
+database/migrations/2026_11_02_090000_ensure_cvs_table_and_photo_column.php
+
+Migration ini:
+- Membuat tabel cvs jika belum ada.
+- Menambahkan kolom yang hilang termasuk foto jika tabel sudah ada.
+- Tidak menghapus tabel atau data CV saat up().
+
+PENYIMPANAN FOTO:
+Foto disimpan pada storage/app/public/foto-portofolio.
+URL publiknya diakses melalui public/storage setelah php artisan storage:link.
+
+PENTING:
+- Jangan menjalankan php artisan migrate:fresh.
+- Jika storage:link mengatakan link sudah ada, itu tidak masalah.
+- Jika upload gagal karena batas ukuran PHP, cek upload_max_filesize dan post_max_size di konfigurasi PHP Laragon.
+- Jika database MySQL kamu memakai password, masukkan pada DB_PASSWORD di .env.

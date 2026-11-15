@@ -1,0 +1,36 @@
+PERBAIKAN CRUD CV - KONEKSI MYSQL + MIGRATION
+
+PENYEBAB ERROR:
+Project sebelumnya memakai DB_CONNECTION=sqlite pada .env.
+Karena itu Laravel menyimpan/membaca database SQLite, bukan database MySQL
+yang dibuka melalui HeidiSQL.
+
+YANG DIPERBAIKI:
+1. .env diubah ke DB_CONNECTION=mysql.
+2. .env.example diselaraskan ke MySQL.
+3. Ditambahkan migration repair_cvs_table_columns untuk membuat tabel cvs
+   jika belum ada, atau menambahkan kolom yang hilang tanpa menghapus data.
+
+LANGKAH:
+1. Ekstrak ZIP dan buka folder laravel-13.
+2. Buka HeidiSQL, pastikan MySQL Laragon berjalan.
+3. Buat database bernama laravel_13 jika belum ada.
+4. Pastikan .env berisi:
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=laravel_13
+   DB_USERNAME=root
+   DB_PASSWORD=
+5. Di terminal pada folder project jalankan:
+   php artisan config:clear
+   php artisan migrate
+   php artisan optimize:clear
+   php artisan serve
+6. Buka http://127.0.0.1:8000/cv
+
+PENTING:
+- Jangan jalankan php artisan migrate:fresh.
+- Pastikan MySQL Laragon aktif dan database laravel_13 sudah dibuat.
+- Migration repair tidak menghapus tabel atau data yang sudah ada.
+- Jika password MySQL Laragon berbeda, ubah DB_PASSWORD di .env.
